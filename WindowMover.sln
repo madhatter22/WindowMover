@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowMover", "HatterWindowMover\WindowMover.csproj", "{021F052F-7B58-49DA-B390-465742FA731C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowMover.Tests", "WindowMover.Tests\WindowMover.Tests.csproj", "{8162036F-60EB-46E5-AED8-79E5DEB040B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{021F052F-7B58-49DA-B390-465742FA731C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{021F052F-7B58-49DA-B390-465742FA731C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{021F052F-7B58-49DA-B390-465742FA731C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{021F052F-7B58-49DA-B390-465742FA731C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8162036F-60EB-46E5-AED8-79E5DEB040B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8162036F-60EB-46E5-AED8-79E5DEB040B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8162036F-60EB-46E5-AED8-79E5DEB040B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8162036F-60EB-46E5-AED8-79E5DEB040B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
