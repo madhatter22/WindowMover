@@ -80,6 +80,7 @@ namespace WindowMover
                     toolStrip.Tag = null;
                 }
                 _contextMenu.Closed -= ContextMenuOnClosed;
+                _contextMenu.ItemClicked -= ContextMenuClick;
                 _contextMenu = null;
             }
         }

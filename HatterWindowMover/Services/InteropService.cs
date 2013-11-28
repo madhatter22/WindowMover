@@ -24,6 +24,7 @@ namespace WindowMover
         bool DeregisterHotKey(IntPtr hWnd, int id);
         bool MoveWindow(WindowInfo process, int x, int y);
         IEnumerable<WindowInfo> GetWindows();
+        //void KillWindow(IntPtr hWnd);
 
         int WindowsHotkeyMsgId { get; }
     }
@@ -41,10 +42,10 @@ namespace WindowMover
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool MoveWindow(IntPtr hWnd, int x, int y, int nWidth, int nHeight, bool bRepaint);
 
-        [DllImport("user32")]
+        [DllImport("user32", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool EnumWindows(EnumWindowsCallback callback, ArrayList lParam);
-
+        
         [DllImport("user32.dll")]
         protected static extern bool IsWindowVisible(IntPtr hWnd);
 
@@ -62,7 +63,7 @@ namespace WindowMover
         
         [DllImport("user32.dll")]
         private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
-
+        
         public int WindowsHotkeyMsgId { get { return 0x0312; } }
         
         bool IInteropService.RegisterHotKey(IntPtr hWnd, int id, int keyModifiers, int? key)
