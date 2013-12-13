@@ -22,7 +22,7 @@ namespace WindowMover.Views
             btnSave.AddBinding(c => c.Enabled, _viewModel, vm => vm.CanSave);
             btnCancel.AddBinding(c => c.Enabled, _viewModel, vm => vm.CanClose);
             lblIsSaving.AddBinding(c => c.Visible, _viewModel, vm => vm.IsSaving);
-
+            
             lstAvailableKeyModifiers.DataSource = _viewModel.AvailableModifiers;
             lstCurrentKeyModifiers.DataSource = _viewModel.CurrentModifiers;
 
@@ -32,12 +32,11 @@ namespace WindowMover.Views
         private void BtnSaveOnClick(object sender, EventArgs e)
         {
             var command = ((Control) sender).Tag as ICommand;
-            if (command != null && command.CanExecute(null))
+            Action close = this.Close;
+            if (command != null && command.CanExecute(close))
             {
-                command.Execute(null);
+                command.Execute(close);
             }
-
-            this.Close();
         }
 
         private void BtnCancelOnClick(object sender, EventArgs e)

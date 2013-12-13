@@ -101,7 +101,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;
-            this.btnCancel.Text = "Done";
+            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancelOnClick);
             // 
@@ -117,12 +117,11 @@
             // lblIsSaving
             // 
             this.lblIsSaving.AutoSize = true;
-            this.lblIsSaving.Location = new System.Drawing.Point(123, 167);
+            this.lblIsSaving.Location = new System.Drawing.Point(151, 167);
             this.lblIsSaving.Name = "lblIsSaving";
             this.lblIsSaving.Size = new System.Drawing.Size(108, 13);
             this.lblIsSaving.TabIndex = 9;
             this.lblIsSaving.Text = "Saving, please wait...";
-            this.lblIsSaving.Visible = false;
             // 
             // ConfigView
             // 

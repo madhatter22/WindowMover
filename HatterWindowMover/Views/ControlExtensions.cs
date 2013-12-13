@@ -14,6 +14,14 @@ namespace WindowMover.Views
                 GetPropertyName(viewModelPropertyExpression));
         }
 
+        public static void AddBinding<TControl, TViewModel, TViewModelProperty>(this TControl control, Expression<Func<TControl, TViewModelProperty>> controlPropertyExpression,
+            TViewModel viewModel, Expression<Func<TViewModel, TViewModelProperty>> viewModelPropertyExpression, DataSourceUpdateMode dataSourceUpdateMode)
+            where TControl : Control
+        {
+            control.DataBindings.Add(GetPropertyName(controlPropertyExpression), viewModel,
+                GetPropertyName(viewModelPropertyExpression), false, dataSourceUpdateMode);
+        }
+
         /// <summary>
         /// Gets the property name from the member expression.
         /// </summary>

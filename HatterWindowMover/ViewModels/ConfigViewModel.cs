@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WindowMover.Annotations;
@@ -29,7 +29,7 @@ namespace WindowMover.ViewModels
             }
 
             DefaultKey = _settings.GetDefaultKey();
-            SaveCommand = new RelayCommand(Save, () => CanSave);
+            SaveCommand = new RelayCommand<Action>(Save, onComplete => CanSave);
         }
 
         private bool _isSaving;
@@ -109,7 +109,7 @@ namespace WindowMover.ViewModels
             }
         }
 
-        public void Save()
+        public void Save(Action onComplete)
         {
             if (CanSave)
             {
@@ -122,7 +122,12 @@ namespace WindowMover.ViewModels
 
                         _settings.SaveModifiers(CurrentModifiers);
                     })
-                    .ContinueWith(t => IsSaving = false, TaskScheduler.FromCurrentSynchronizationContext());
+                    .ContinueWith(t =>
+                    {
+                        IsSaving = false;
+
+                        onComplete();
+                    }, TaskScheduler.FromCurrentSynchronizationContext());
             }
         }
 

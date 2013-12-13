@@ -30,4 +30,33 @@ namespace WindowMover.ViewModels
 
         public event EventHandler CanExecuteChanged;
     }
+
+    public class RelayCommand<TParameter> : ICommand
+    {
+        private readonly Action<TParameter> _action;
+        private readonly Func<TParameter, bool> _canExecute;
+        public RelayCommand(Action<TParameter> action)
+            : this(action, null)
+        {
+        }
+
+        public RelayCommand(Action<TParameter> action, Func<TParameter, bool> canExecute)
+        {
+            if (action == null) throw new ArgumentNullException("action");
+            _action = action;
+            _canExecute = canExecute;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute == null || _canExecute((TParameter)parameter);
+        }
+
+        public void Execute(object parameter)
+        {
+            _action((TParameter)parameter);
+        }
+
+        public event EventHandler CanExecuteChanged;
+    }
 }
