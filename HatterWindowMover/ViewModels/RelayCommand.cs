@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace WindowMover
+namespace WindowMover.ViewModels
 {
     public class RelayCommand : ICommand
     {

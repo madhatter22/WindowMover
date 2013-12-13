@@ -1,4 +1,4 @@
-﻿namespace WindowMover
+﻿namespace WindowMover.Views
 {
     partial class MainView
     {

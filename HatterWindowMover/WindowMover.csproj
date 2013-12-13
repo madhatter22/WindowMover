@@ -7,8 +7,8 @@
     <ProjectGuid>{021F052F-7B58-49DA-B390-465742FA731C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HatterWindowMover</RootNamespace>
-    <AssemblyName>HatterWindowMover</AssemblyName>
+    <RootNamespace>WindowMover</RootNamespace>
+    <AssemblyName>WindowMover</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\WindowInfo.cs" />
+    <Compile Include="Models\KeyModifiers.cs" />
     <Compile Include="Views\ConfigView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +57,7 @@
     </Compile>
     <Compile Include="ViewModels\ConfigViewModel.cs" />
     <Compile Include="Services\InteropService.cs" />
+    <Compile Include="Views\ControlExtensions.cs" />
     <Compile Include="Views\MainView.cs">
       <SubType>Form</SubType>
     </Compile>

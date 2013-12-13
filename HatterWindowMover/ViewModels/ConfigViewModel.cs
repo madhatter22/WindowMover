@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using WindowMover.Annotations;
+using WindowMover.Models;
+using WindowMover.Services;
 
-namespace WindowMover
+namespace WindowMover.ViewModels
 {
     public class ConfigViewModel : INotifyPropertyChanged
     {
         private readonly ISettingsService _settings;
-        private readonly List<KeyModifiers> _allKeyModifiers;
 
         public ConfigViewModel(ISettingsService settings)
         {
             if (settings == null) throw new ArgumentNullException("settings");
 
             _settings = settings;
-            _allKeyModifiers = _settings.GetAllModifiers().Where(m => m != KeyModifiers.Nomod).ToList();
+            var allKeyModifiers = _settings.GetAllModifiers().Where(m => m != KeyModifiers.Nomod).ToList();
             CurrentModifiers = new BindingList<KeyModifiers>(_settings.GetSavedModifiers().ToList());
-            AvailableModifiers = new BindingList<KeyModifiers>(_allKeyModifiers.Except(CurrentModifiers).ToList());
+            AvailableModifiers = new BindingList<KeyModifiers>(allKeyModifiers.Except(CurrentModifiers).ToList());
             if (CurrentModifiers.Count == 0)
             {
                 CurrentModifiers.Add(KeyModifiers.Nomod);
@@ -28,6 +30,22 @@ namespace WindowMover
 
             DefaultKey = _settings.GetDefaultKey();
             SaveCommand = new RelayCommand(Save, () => CanSave);
+        }
+
+        private bool _isSaving;
+        public bool IsSaving
+        {
+            get { return _isSaving; }
+            set
+            {
+                if (_isSaving != value)
+                {
+                    _isSaving = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged("CanSave");
+                    OnPropertyChanged("CanClose");
+                }
+            }
         }
 
         public ICommand SaveCommand { get; private set; }
@@ -78,8 +96,16 @@ namespace WindowMover
         {
             get
             {
-                return (CurrentModifiers.Count > 1 ||
+                return !IsSaving && (CurrentModifiers.Count > 1 ||
                         (CurrentModifiers.Count > 0 && !CurrentModifiers.Contains(KeyModifiers.Nomod)));
+            }
+        }
+
+        public bool CanClose
+        {
+            get
+            {
+                return !IsSaving;
             }
         }
 
@@ -87,10 +113,16 @@ namespace WindowMover
         {
             if (CanSave)
             {
-                if (DefaultKey.HasValue)
-                    _settings.SaveDefaultKey(DefaultKey.Value);
+                IsSaving = true;
 
-                _settings.SaveModifiers(CurrentModifiers);
+                Task.Run(() =>
+                    {
+                        if (DefaultKey.HasValue)
+                            _settings.SaveDefaultKey(DefaultKey.Value);
+
+                        _settings.SaveModifiers(CurrentModifiers);
+                    })
+                    .ContinueWith(t => IsSaving = false, TaskScheduler.FromCurrentSynchronizationContext());
             }
         }
 

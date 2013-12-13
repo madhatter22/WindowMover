@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WindowMover.Models;
+using WindowMover.Services;
 
-namespace WindowMover
+namespace WindowMover.ViewModels
 {
     public class MainViewModel
     {

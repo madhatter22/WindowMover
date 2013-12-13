@@ -5,34 +5,18 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using WindowMover.Models;
 
-namespace WindowMover
+namespace WindowMover.Services
 {
-    [Flags]
-    public enum KeyModifiers
-    {
-        Nomod = 0x0000,
-        Alt = 0x0001,
-        Ctrl = 0x0002,
-        Shift = 0x0004,
-        Win = 0x0008
-    }
-
     public interface IInteropService
     {
         bool RegisterHotKey(IntPtr hWnd, int id, int keyModifiers, int? key);
         bool DeregisterHotKey(IntPtr hWnd, int id);
         bool MoveWindow(WindowInfo process, int x, int y);
         IEnumerable<WindowInfo> GetWindows();
-        //void KillWindow(IntPtr hWnd);
 
         int WindowsHotkeyMsgId { get; }
-    }
-
-    public class WindowInfo
-    {
-        public string Description { get; set; }
-        public IntPtr Handle { get; set; }
     }
 
     public class InteropService : IInteropService

@@ -1,4 +1,4 @@
-﻿namespace WindowMover
+﻿namespace WindowMover.Views
 {
     partial class ConfigView
     {
@@ -37,6 +37,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lstCurrentKeyModifiers = new System.Windows.Forms.ListBox();
+            this.lblIsSaving = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl
@@ -113,11 +114,22 @@
             this.lstCurrentKeyModifiers.TabIndex = 8;
             this.lstCurrentKeyModifiers.DoubleClick += new System.EventHandler(this.LstCurrentKeyModifiersOnDoubleClick);
             // 
+            // lblIsSaving
+            // 
+            this.lblIsSaving.AutoSize = true;
+            this.lblIsSaving.Location = new System.Drawing.Point(123, 167);
+            this.lblIsSaving.Name = "lblIsSaving";
+            this.lblIsSaving.Size = new System.Drawing.Size(108, 13);
+            this.lblIsSaving.TabIndex = 9;
+            this.lblIsSaving.Text = "Saving, please wait...";
+            this.lblIsSaving.Visible = false;
+            // 
             // ConfigView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 200);
+            this.Controls.Add(this.lblIsSaving);
             this.Controls.Add(this.lstCurrentKeyModifiers);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -145,5 +157,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ListBox lstCurrentKeyModifiers;
+        private System.Windows.Forms.Label lblIsSaving;
     }
 }

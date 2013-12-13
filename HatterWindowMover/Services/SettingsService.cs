@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WindowMover.Models;
 
-namespace WindowMover
+namespace WindowMover.Services
 {
     public interface ISettingsService
     {

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Windows.Input;
+using WindowMover.Models;
+using WindowMover.Services;
+using WindowMover.ViewModels;
 
-namespace WindowMover
+namespace WindowMover.Views
 {
     public partial class ConfigView : Form
     {
@@ -15,8 +18,11 @@ namespace WindowMover
             _viewModel = viewModel;
 
             //apply bindings
-            txtKey.DataBindings.Add("Text", _viewModel, "DefaultKeyString");
-            btnSave.DataBindings.Add("Enabled", _viewModel, "CanSave");
+            txtKey.AddBinding(c => c.Text, _viewModel, vm => vm.DefaultKeyString);
+            btnSave.AddBinding(c => c.Enabled, _viewModel, vm => vm.CanSave);
+            btnCancel.AddBinding(c => c.Enabled, _viewModel, vm => vm.CanClose);
+            lblIsSaving.AddBinding(c => c.Visible, _viewModel, vm => vm.IsSaving);
+
             lstAvailableKeyModifiers.DataSource = _viewModel.AvailableModifiers;
             lstCurrentKeyModifiers.DataSource = _viewModel.CurrentModifiers;
 

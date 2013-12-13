@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using WindowMover.Models;
+using WindowMover.ViewModels;
 
-namespace WindowMover
+namespace WindowMover.Views
 {
     public partial class MainView : Form
     {
@@ -75,7 +76,7 @@ namespace WindowMover
         {
             if (_contextMenu != null)
             {
-                foreach (var toolStrip in _contextMenu.Items.OfType<ToolStripItem>())
+                foreach (ToolStripItem toolStrip in _contextMenu.Items)
                 {
                     toolStrip.Tag = null;
                 }

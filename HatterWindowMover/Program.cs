@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using WindowMover.ViewModels;
+using WindowMover.Views;
 
 namespace WindowMover
 {
