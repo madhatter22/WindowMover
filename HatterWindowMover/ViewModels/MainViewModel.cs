@@ -8,9 +8,9 @@ namespace WindowMover.ViewModels
 {
     public class MainViewModel
     {
-        private ISettingsService _settings;
-        private IInteropService _interop;
-        private int _id;
+        private readonly ISettingsService _settings;
+        private readonly IInteropService _interop;
+        private readonly int _id;
 
         public MainViewModel() : this(new SettingsService(), new InteropService())
         {
