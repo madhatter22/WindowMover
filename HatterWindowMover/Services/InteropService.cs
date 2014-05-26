@@ -67,7 +67,7 @@ namespace WindowMover.Services
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
-            return result;
+            return true;
         }
 
         public IEnumerable<WindowInfo> GetWindows()

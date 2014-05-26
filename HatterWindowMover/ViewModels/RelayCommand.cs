@@ -7,6 +7,8 @@ namespace WindowMover.ViewModels
     {
         private readonly Action _action;
         private readonly Func<bool> _canExecute;
+        private bool _canExecuteState;
+
         public RelayCommand(Action action) : this(action, null)
         {
         }
@@ -20,7 +22,18 @@ namespace WindowMover.ViewModels
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute();
+            var canExecute = _canExecute == null || _canExecute();
+            if (CanExecuteChanged != null && canExecute != _canExecuteState)
+            {
+                _canExecuteState = canExecute;
+                CanExecuteChanged(this, new EventArgs());
+            }
+            else
+            {
+                _canExecuteState = canExecute;
+            }
+            
+            return canExecute;
         }
 
         public void Execute(object parameter)
@@ -35,6 +48,8 @@ namespace WindowMover.ViewModels
     {
         private readonly Action<TParameter> _action;
         private readonly Func<TParameter, bool> _canExecute;
+        private bool _canExecuteState;
+
         public RelayCommand(Action<TParameter> action)
             : this(action, null)
         {
@@ -49,7 +64,18 @@ namespace WindowMover.ViewModels
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute((TParameter)parameter);
+            var canExecute = _canExecute == null || _canExecute((TParameter)parameter);
+            if (CanExecuteChanged != null && canExecute != _canExecuteState)
+            {
+                _canExecuteState = canExecute;
+                CanExecuteChanged(this, new EventArgs());
+            }
+            else
+            {
+                _canExecuteState = canExecute;
+            }
+
+            return canExecute;
         }
 
         public void Execute(object parameter)

@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using System.Windows.Input;
 using WindowMover.Models;
-using WindowMover.Services;
 using WindowMover.ViewModels;
 
 namespace WindowMover.Views
@@ -32,7 +31,7 @@ namespace WindowMover.Views
         private void BtnSaveOnClick(object sender, EventArgs e)
         {
             var command = ((Control) sender).Tag as ICommand;
-            Action close = this.Close;
+            Action close = Close;
             if (command != null && command.CanExecute(close))
             {
                 command.Execute(close);
@@ -41,7 +40,7 @@ namespace WindowMover.Views
 
         private void BtnCancelOnClick(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void TxtKeyOnKeyPress(object sender, KeyPressEventArgs e)
@@ -62,7 +61,6 @@ namespace WindowMover.Views
             var selected = ((ListBox)sender).SelectedItem;
             if (selected != null)
                 _viewModel.RemoveModifier((KeyModifiers)selected);
-
         }
     }
 }

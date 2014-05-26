@@ -8,9 +8,9 @@ namespace WindowMover.Views
 {
     public partial class MainView : Form
     {
-        private NotifyIcon _notifyIcon;
+        private readonly NotifyIcon _notifyIcon;
         private ContextMenuStrip _contextMenu;
-        private MainViewModel _viewModel;
+        private readonly MainViewModel _viewModel;
 
         public MainView(MainViewModel viewModel)
         {
@@ -29,12 +29,12 @@ namespace WindowMover.Views
                 Visible = true
             };
 
-            _viewModel.RegisterHotKey(this.Handle);
+            _viewModel.RegisterHotKey(Handle);
         }
 
         private void Exit(object sender, EventArgs e)
         {
-            _viewModel.DeregisterHotKey(this.Handle);
+            _viewModel.DeregisterHotKey(Handle);
             _notifyIcon.Visible = false;
             Application.Exit();
         }
@@ -91,8 +91,8 @@ namespace WindowMover.Views
             using (var config = new ConfigView(_viewModel.GetConfigViewModel()))
             {
                 config.ShowDialog();
-                _viewModel.DeregisterHotKey(this.Handle);
-                _viewModel.RegisterHotKey(this.Handle);
+                _viewModel.DeregisterHotKey(Handle);
+                _viewModel.RegisterHotKey(Handle);
             }
         }
     }
