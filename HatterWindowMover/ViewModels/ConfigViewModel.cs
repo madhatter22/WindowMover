@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WindowMover.Annotations;
@@ -103,10 +102,7 @@ namespace WindowMover.ViewModels
 
         public bool CanClose
         {
-            get
-            {
-                return !IsSaving;
-            }
+            get { return !IsSaving; }
         }
 
         public void Save(Action onComplete)
